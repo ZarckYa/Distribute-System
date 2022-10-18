@@ -1,0 +1,40 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        <h:form>
+            <h2>Add new job to database</h2>
+            Enter the ID of job:
+            <h:inputText id="id" value="#{jobBean.jobID}"/><br/>
+            Enter the title of job:
+            <h:inputText id="title" value="#{jobBean.title}"/><br/>
+            Enter the keywords of job:
+            <h:inputText id="keyword" value="#{jobBean.keyword}"></h:inputText><br/>
+            Enter the description of job:
+            <h:inputText id="description" value="#{jobBean.description}"></h:inputText><br/>
+            Enter the payment of job:
+            <h:inputText id="job" value="#{jobBean.payment}"></h:inputText><br/>
+            Enter the payment of providerID:
+            <h:inputText id="providerID" value="#{jobBean.provideid}"></h:inputText><br/>
+            Enter the payment of openstatu:
+            <h:inputText id="openstatu" value="#{jobBean.openstatu}"></h:inputText><br/>
+            Enter the payment of completedstatu:
+            <h:inputText id="completedstatu" value="#{jobBean.completedstatu}"></h:inputText><br/>
+            <br/><br/>
+            <h:commandButton id="add_Session" value="Add to database session" action="#{jobBean.addJob()}"></h:commandButton>
+            <br/>
+            <h:commandButton id="show" value="show Job" action="showJob"></h:commandButton>
+            <br/>
+            <h:outputText value="#{jobBean.notification()}"/><br/>
+            <br/><br/><br/>
+            <h:commandButton id="test01" value="Provider" action="Providertest"></h:commandButton><br/><br/>
+            <h:commandButton id="test02" value="Admin" action="Admintest"></h:commandButton><br/><br/>
+            <h:commandButton id="test03" value="Job" action="JobTest"></h:commandButton><br/><br/>
+        </h:form>
+    </h:body>
+</html>
+

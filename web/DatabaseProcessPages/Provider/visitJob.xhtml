@@ -1,0 +1,87 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+<ui:composition template="/Templates/TemplateProvider.xhtml" 
+                                xmlns="http://www.w3.org/1999/xhtml"
+                                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                                xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+                                <ui:define name="content">
+                                <h:form>
+                                    <h:panelGrid columns="2">
+                                    <p style="font-size: 24px; color: green">Your Provider ID: </p>
+                                    <h:outputText value="#{loginBean.ID}" style="font-size: 24px;"/>
+                                    </h:panelGrid>
+                                    <h:panelGrid columns="1">
+                                    <h:commandButton id="showJob" value="Show job" action="#{jobBean.showTableAll()}"/><br/>
+                              
+                                    <h:dataTable value="#{jobBean.findByProviderId(loginBean.ID)}" var="job"
+                                                 border="1" cellpadding="10" rendered="#{jobBean.showTableAll}">
+                                        <h:column>
+                                        <f:facet name="header">ID</f:facet>
+                                        #{job.jobid}
+                                        </h:column>
+                                        
+                                        <h:column>
+                                        <f:facet name="header">Title</f:facet>
+                                        #{job.title}
+                                        </h:column>
+                                        
+                                        <h:column>
+                                        <f:facet name="header">Keywords</f:facet>
+                                        #{job.keyword}
+                                        </h:column>
+
+                                        <h:column>
+                                        <f:facet name="header">Description</f:facet>
+                                        #{job.description}
+                                        </h:column>
+
+                                        <h:column>
+                                        <f:facet name="header">Payment</f:facet>
+                                        #{job.payment}
+                                        </h:column>
+
+                                        <h:column>
+                                        <f:facet name="header">Openstatus</f:facet>
+                                        #{job.openstatu}
+                                        </h:column><!-- comment -->
+
+                                        <h:column>
+                                        <f:facet name="header">CompletedStatus</f:facet>
+                                        #{job.completedstatu}
+                                        </h:column>
+
+                                        <h:column>
+                                        <f:facet name="header">Delete</f:facet>
+                                        <h:commandButton id="deletejob" value="Remove" 
+                                                         action="#{adminBean.removeJob(job.jobid)}"
+                                                         disabled="#{not job.openstatu}"/>
+                                        </h:column><!-- comment -->     
+                                        
+                                        <h:column>
+                                        <f:facet name="header">TO Completed</f:facet>
+                                        <h:commandButton id="completedjob" value="Completed"
+                                                         action="#{jobBean.markAsCompleted(job.jobid)}"
+                                                         disabled="#{job.openstatu or job.completedstatu}">
+                                            <f:actionListener binding="#{freelancerBean.updataFreelancerAccount(job.jobid)}"/>
+                                               <f:actionListener binding="#{logBean.MarkAsCompletedLog(loginBean.ID, job.jobid, job.payment)}"/> 
+                                               <f:actionListener binding="#{logBean.createLog()}"/>                                            
+                                        </h:commandButton>
+                                        </h:column><!-- comment --> 
+                                        
+                                    </h:dataTable><br/>                                
+                               </h:panelGrid>     
+                                    
+                                </h:form>
+                                </ui:define>
+    
+</ui:composition>
+            </h:body>
+</html>

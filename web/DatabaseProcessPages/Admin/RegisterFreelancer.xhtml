@@ -1,0 +1,37 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <head>
+        <title>Facelet Title</title>
+    </head>
+    <h:body>
+            <ui:composition template="/Templates/TemplateAdmin.xhtml" 
+                                xmlns="http://www.w3.org/1999/xhtml"
+                                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                                xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+                                <ui:define name="content">
+                                <h:form>
+                                    <h:panelGrid columns="1" style="margin: 0 auto">
+                                    <h2><p style="text-indent: 10px; font-size: 28px">Register a new freelancer account</p></h2>
+                                    <li style= "align-items: center"><p style="font-size: 20px;">Please input Freelancer ID: </p></li>
+                                    <p><h:inputText value="#{freelancerBean.ID}">
+                                       </h:inputText></p>
+                                    <li style= "align-items: center"><p style="font-size: 20px">Please input Freelancer Password: </p></li>
+                                    <h:inputSecret id="freelancerpassword" value="#{freelancerBean.password}">
+                                            <f:validator validatorId="registerValidation"/>
+                                    </h:inputSecret>
+                                    <li style= "align-items: center"><p style="font-size: 20px">Please input Freelancer Password again: </p></li>
+                                    <h:inputSecret value="#{freelancerBean.comfirmPassword}"/>
+                                    <h:commandButton id="adminlogin" value="Register" action="#{freelancerBean.registerFreelancer()}"/><br/>
+                                    <h:outputText value="Register Unsuccessful, Password is not same or ID is occupied" style="color: red" rendered="#{freelancerBean.noregisted}"/>
+                                    <h:outputText value="Register Successful" style="color: red" rendered="#{freelancerBean.registed}"/>
+                                    </h:panelGrid>
+                                </h:form>
+                                </ui:define>
+   
+             </ui:composition>
+    </h:body>
+</html>

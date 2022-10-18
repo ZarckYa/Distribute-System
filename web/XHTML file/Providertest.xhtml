@@ -1,0 +1,40 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <head>
+        <title>Facelet Title</title>
+    </head>
+    <body>
+        <h:form>
+        <h:inputText id="finjobbyID" value="#{providerBean.id}"></h:inputText><br/>
+        <h:commandButton id="search" value="SearchJob"></h:commandButton><br/>
+        <h:commandButton id="findalljob" value="FindALLJob"></h:commandButton><br/>
+        <h:outputText value="#{providerBean.notification()}"/><br/><br/>
+        <h:outputText value="#{providerBean.findByProviderId()}"/><br/><br/>
+        <h:outputText value="#{providerBean.findALL()}"/><br/><br/>
+        <h:outputText value="#{providerBean.test}"/><br/><br/>
+        
+        <p>Please input the provider ID</p>
+        <h:inputText value="#{providerBean.id}"/>
+        <p>Please input the provider Password</p>
+        <h:inputSecret value="#{providerBean.password}"/><br/>
+        <h:commandButton id="register" value="register" action="#{providerBean.registerProvider()}"/>
+        
+        
+        <h:dataTable value="#{providerBean.findALL()}" var="provider"
+                     border="1" cellpadding="10">
+        <h:column>
+            <f:facet name="header">ID</f:facet>
+            #{provider.id}
+        </h:column>
+        <h:column>
+            <f:facet name="header">Password</f:facet>
+            #{provider.password}
+        </h:column>
+        </h:dataTable>
+        </h:form>
+    </body>
+</html>
+

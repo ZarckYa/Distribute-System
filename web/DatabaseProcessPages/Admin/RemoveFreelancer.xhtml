@@ -1,0 +1,40 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <head>
+        <title>Facelet Title</title>
+    </head>
+    <h:body>
+            <ui:composition template="/Templates/TemplateAdmin.xhtml" 
+                                xmlns="http://www.w3.org/1999/xhtml"
+                                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                                xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+                                <ui:define name="content">
+                                <h:form>
+                                    <p style="font-size: 24px">All freelancer in your database: </p>    
+                                <!--<p style="font-size: 24px">Please enter FreelancerID you want to search</p>-->
+                                <!--<h:inputText value="#{freelancerBean.ID}"/><br/>-->
+                                <h:commandButton value="Search" action="#{freelancerBean.showTable()}"/>
+                                <h:dataTable value="#{freelancerBean.findByALL()}" var="freelancer"
+                                             border="1" cellpadding="10" rendered="#{freelancerBean.showTable}">
+                                    <h:column>
+                                    <f:facet name="header">ID</f:facet>
+                                    #{freelancer.freelancerid}
+                                    </h:column>
+                                    <h:column>
+                                    <f:facet name="header">Password</f:facet>
+                                    #{freelancer.password}
+                                    </h:column>
+                                </h:dataTable><br/>
+                                <p style="font-size: 24px">According your search result, please enter the ID of Entries you want delete:</p>
+                                <h:inputText value="#{adminBean.ID}"/><br/>
+                                <h:commandButton value="Delete" action="#{adminBean.removeFreelancer(adminBean.ID)}"/>
+                                </h:form>
+                                </ui:define>
+   
+             </ui:composition>
+    </h:body>
+</html>

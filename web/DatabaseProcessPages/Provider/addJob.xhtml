@@ -1,0 +1,38 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+            <ui:composition template="/Templates/TemplateProvider.xhtml" 
+                                xmlns="http://www.w3.org/1999/xhtml"
+                                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                                xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+                                <ui:define name="content">
+                                <h:form>
+                                    <h:panelGrid columns="2" style="margin: 0 auto">
+                                        <p style="font-size: 18px">Please input the Job title:</p>
+                                        <h:inputText value="#{jobBean.title}"/>
+                                        <p style="font-size: 18px">Please input the Job keyword:</p>
+                                        <h:inputText value="#{jobBean.keyword}"/>
+                                        <p style="font-size: 18px">Please input the Job description:</p>
+                                        <h:inputTextarea value="#{jobBean.description}" cols="20" rows="10" style="width: 250"/>
+                                        <p style="font-size: 18px">Please input the Job payment:</p>
+                                        <h:inputText value="#{jobBean.payment}"/>
+                                        <p style="font-size: 18px">Your Provider ID:</p>
+                                        <h:outputText value="#{loginBean.ID}" style="font-size: 18px;"/>
+                                        
+                                        <h:commandButton value="Create Job" action="#{jobBean.addJob(loginBean.ID)}"/>
+                                        <p style="font-size: 18px; color: green">#{jobBean.notification()}</p>
+                                   </h:panelGrid>
+                                    
+                                </h:form>
+                                </ui:define>
+    
+             </ui:composition>
+
+    </h:body>
+</html>

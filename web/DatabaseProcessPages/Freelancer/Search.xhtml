@@ -1,0 +1,128 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+            <ui:composition template="/Templates/TemplateFreelancer.xhtml" 
+                                xmlns="http://www.w3.org/1999/xhtml"
+                                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                                xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+                                <ui:define name="content">
+                                <h:form>
+                                    <p style="font-size: 32px; color: green">Your can search job through some index: </p>
+                                    <h:panelGrid columns="1">
+                                        
+                                    <h:panelGrid columns="1">
+                                    <p style="font-size: 24px">You can search by job ID: </p>
+                                    <p style="font-size: 18px">Enter jobID</p>
+                                    <h:inputText value="#{jobBean.jobID}"/>    
+                                    <h:commandButton id="showJobbyID" value="Search" action="#{jobBean.showTableID()}"/><br/>
+                              
+                                    <h:dataTable value="#{jobBean.findByIds()}" var="job"
+                                                 border="1" cellpadding="10" rendered="#{jobBean.showTableID}">
+                                        <h:column>
+                                        <f:facet name="header">ID</f:facet>
+                                        #{job.jobid}
+                                        </h:column>
+                                        
+                                        <h:column>
+                                        <f:facet name="header">Title</f:facet>
+                                        #{job.title}
+                                        </h:column>
+                                        
+                                        <h:column>
+                                        <f:facet name="header">Keywords</f:facet>
+                                        #{job.keyword}
+                                        </h:column>
+
+                                        <h:column>
+                                        <f:facet name="header">Description</f:facet>
+                                        #{job.description}
+                                        </h:column>
+
+                                        <h:column>
+                                        <f:facet name="header">Payment</f:facet>
+                                        #{job.payment}
+                                        </h:column>
+
+                                        <h:column>
+                                        <f:facet name="header">ProviderID</f:facet>
+                                        #{job.provideid}
+                                        </h:column><!-- comment -->                                        
+                                        
+                                        <h:column>
+                                        <f:facet name="header">Openstatus</f:facet>
+                                        #{job.openstatu}
+                                        </h:column><!-- comment -->
+
+                                        <h:column>
+                                        <f:facet name="header">CompletedStatus</f:facet>
+                                        #{job.completedstatu}
+                                        </h:column>
+                                    </h:dataTable>
+                               </h:panelGrid><br/><br/> 
+                                        
+                               <h:panelGrid>
+                                    <p style="font-size: 24px">You can search by job keywords: </p>
+                                    <p style="font-size: 18px">Enter keywords</p>
+                                    <h:inputText value="#{jobBean.keyword}"/>    
+                                    <h:commandButton id="showJobBykeyword" value="Search" action="#{jobBean.showTableKeywords()}"/><br/>
+                              
+                                    <h:dataTable value="#{jobBean.findByKeywords()}" var="job"
+                                                 border="1" cellpadding="10" rendered="#{jobBean.showTableKeywords}">
+                                        <h:column>
+                                        <f:facet name="header">ID</f:facet>
+                                        #{job.jobid}
+                                        </h:column>
+                                        
+                                        <h:column>
+                                        <f:facet name="header">Title</f:facet>
+                                        #{job.title}
+                                        </h:column>
+                                        
+                                        <h:column>
+                                        <f:facet name="header">Keywords</f:facet>
+                                        #{job.keyword}
+                                        </h:column>
+
+                                        <h:column>
+                                        <f:facet name="header">Description</f:facet>
+                                        #{job.description}
+                                        </h:column>
+
+                                        <h:column>
+                                        <f:facet name="header">Payment</f:facet>
+                                        #{job.payment}
+                                        </h:column>
+
+                                        <h:column>
+                                        <f:facet name="header">ProviderID</f:facet>
+                                        #{job.provideid}
+                                        </h:column><!-- comment -->                                        
+                                        
+                                        <h:column>
+                                        <f:facet name="header">Openstatus</f:facet>
+                                        #{job.openstatu}
+                                        </h:column><!-- comment -->
+
+                                        <h:column>
+                                        <f:facet name="header">CompletedStatus</f:facet>
+                                        #{job.completedstatu}
+                                        </h:column>
+                                    </h:dataTable>   
+                                   </h:panelGrid>     
+                                        
+                               </h:panelGrid>
+                                </h:form>
+                                
+                                </ui:define>
+    
+
+             </ui:composition>
+    </h:body>
+</html>

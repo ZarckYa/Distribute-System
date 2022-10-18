@@ -1,0 +1,64 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <head>
+        <title>Facelet Title</title>
+    </head>
+    <h:body>
+            <ui:composition template="/Templates/TemplateAdmin.xhtml" 
+                                xmlns="http://www.w3.org/1999/xhtml"
+                                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                                xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+                                <ui:define name="content">
+                                <h:form>
+                                <p style="font-size: 24px">Show any status you can delete</p>
+                                <h:commandButton value="Search" action="#{jobBean.showTableAll()}"/>
+                                <h:dataTable value="#{jobBean.findByALL()}" var="job"
+                                             border="1" cellpadding="10" rendered="#{jobBean.showTableAll}">
+                                        <h:column>
+                                        <f:facet name="header">ID</f:facet>
+                                        #{job.jobid}
+                                        </h:column>
+                                        
+                                        <h:column>
+                                        <f:facet name="header">Title</f:facet>
+                                        #{job.title}
+                                        </h:column>
+                                        
+                                        <h:column>
+                                        <f:facet name="header">Keywords</f:facet>
+                                        #{job.keyword}
+                                        </h:column>
+
+                                        <h:column>
+                                        <f:facet name="header">Description</f:facet>
+                                        #{job.description}
+                                        </h:column>
+
+                                        <h:column>
+                                        <f:facet name="header">Payment</f:facet>
+                                        #{job.payment}
+                                        </h:column>
+
+                                        <h:column>
+                                        <f:facet name="header">Openstatus</f:facet>
+                                        #{job.openstatu}
+                                        </h:column><!-- comment -->
+
+                                        <h:column>
+                                        <f:facet name="header">CompletedStatus</f:facet>
+                                        #{job.completedstatu}
+                                        </h:column>  
+                                </h:dataTable><br/>
+                                <p style="font-size: 24px">According your search result, please enter the ID of Entries you want delete:</p>
+                                <h:inputText value="#{adminBean.ID}"/><br/>
+                                <h:commandButton value="Delete" action="#{adminBean.removeJob(adminBean.ID)}"/>
+                                </h:form>
+                                </ui:define>
+   
+             </ui:composition>
+    </h:body>
+</html>

@@ -1,0 +1,81 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+            <ui:composition template="/Templates/TemplateProvider.xhtml" 
+                                xmlns="http://www.w3.org/1999/xhtml"
+                                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                                xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+                                <ui:define name="content">
+                                <h:form>
+                                   <h:panelGrid columns="2">
+                                   <h:panelGrid>
+                                       <p style="font-size: 20px">All applications you receive: </p>
+                                       
+                                       <h:dataTable value="#{offerBean.findByProviderID(loginBean.ID)}" var="offer"
+                                                 border="1" cellpadding="10">
+                                        <h:column>
+                                        <f:facet name="header">JobID</f:facet>
+                                        #{offer.getJobidList()}
+                                        </h:column>
+                                        
+                                        <h:column>
+                                        <f:facet name="header">FreelancerID</f:facet>
+                                        #{offer.getFreelanceridList()}
+                                        </h:column>
+                                        
+                                        <h:column>
+                                        <f:facet name="header">Acceptstatu</f:facet>
+                                        #{offer.acceptstatu}
+                                        </h:column>
+
+                                        <h:column>
+                                        <f:facet name="header">Accept</f:facet>
+                                        
+                                        <h:commandButton id="acceptoffer" value="Accept" 
+                                                         action="#{offerBean.acceptApplication(offer.jobid, offer.freelancerid)}"
+                                                         disabled="#{offer.acceptstatu}">
+                                               <f:actionListener binding="#{jobBean.markAsClose(offer.getJobidList())}"/>
+                                               <f:actionListener binding="#{logBean.AcceptLog(loginBean.ID, offer.getFreelanceridList(), offer.getJobidList())}"/> 
+                                               <f:actionListener binding="#{logBean.createLog()}"/>                                              
+                                        </h:commandButton>
+                                                         
+                                        </h:column><!-- comment -->     
+                                        
+                                    </h:dataTable><br/>
+                                    
+                                    <p style="font-size: 20px">Please enter the Freelancer ID you want to check: </p>
+                                    <h:inputText value="#{offerBean.freelancerID}"/>
+                                    <h:commandButton id="check" value="Check" action="#{offerBean.setShowTable()}"/>
+                                    <h:dataTable value="#{freelancerBean.findProfileByID(offerBean.freelancerID)}" var="profile"
+                                                 border="1" cellpadding="10" rendered="#{offerBean.showTable}">
+                                        <h:column>
+                                        <f:facet name="header">Name</f:facet>
+                                        #{profile.name}
+                                        </h:column>
+                                        
+                                        <h:column>
+                                        <f:facet name="header">CV</f:facet>
+                                        #{profile.cvinfo}
+                                        </h:column>
+                                                                             
+                                    </h:dataTable><br/>                                     
+                                   </h:panelGrid>
+                                       
+                                   <h:panelGrid>
+                                       
+                                   </h:panelGrid>
+                                   </h:panelGrid>
+                                </h:form>
+                                </ui:define>
+    
+             </ui:composition>
+
+    </h:body>
+</html>

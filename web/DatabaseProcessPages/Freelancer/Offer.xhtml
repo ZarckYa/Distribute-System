@@ -1,0 +1,98 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+            <ui:composition template="/Templates/TemplateFreelancer.xhtml" 
+                                xmlns="http://www.w3.org/1999/xhtml"
+                                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                                xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+                                <ui:define name="content">
+                                <h:form>
+                                    <p style="font-size: 32px; color: green">Your can propose a application of job </p>
+                                    <h:panelGrid columns="2">
+                                        
+                                    <h:panelGrid columns="1">
+                                    <h:commandButton id="showJob" value="Show open statu job" action="#{offerBean.showTableAll()}"/><br/>
+                              
+                                    <h:dataTable value="#{jobBean.findByOpenstatu()}" var="job"
+                                                 border="1" cellpadding="10" rendered="#{offerBean.showTableAll}">
+                                        <h:column>
+                                        <f:facet name="header">ID</f:facet>
+                                        #{job.jobid}
+                                        </h:column>
+                                        
+                                        <h:column>
+                                        <f:facet name="header">Title</f:facet>
+                                        #{job.title}
+                                        </h:column>
+                                        
+                                        <h:column>
+                                        <f:facet name="header">Keywords</f:facet>
+                                        #{job.keyword}
+                                        </h:column>
+
+                                        <h:column>
+                                        <f:facet name="header">Description</f:facet>
+                                        #{job.description}
+                                        </h:column>
+
+                                        <h:column>
+                                        <f:facet name="header">Payment</f:facet>
+                                        #{job.payment}
+                                        </h:column>
+
+                                        <h:column>
+                                        <f:facet name="header">ProviderID</f:facet>
+                                        #{job.provideid}
+                                        </h:column><!-- comment -->                                        
+                                        
+                                        <h:column>
+                                        <f:facet name="header">Openstatus</f:facet>
+                                        #{job.openstatu}
+                                        </h:column><!-- comment -->
+
+                                        <h:column>
+                                        <f:facet name="header">CompletedStatus</f:facet>
+                                        #{job.completedstatu}
+                                        </h:column>
+                                    </h:dataTable><br/>                                
+                               </h:panelGrid>
+                                
+                               <h:panelGrid>
+                                   <p style="font-size: 20px">Here, you can propose a offer: </p>
+                                   <p style="font-size: 20px">Your freelancer ID: </p>
+                                   <h:outputText value="#{loginBean.ID}" style="font-size: 20px; color: green"/>
+                                   <p style="font-size: 16px">Please enter the ID of JobProvider: </p>
+                                   <h:inputText value="#{offerBean.providerID}"/>
+                                   <p style="font-size: 16px">Please enter the ID of Job: </p>
+                                   <h:inputText value="#{offerBean.jobID}"/>                                   
+                                   <h:commandButton id="findID" value="Comfirm">
+                                       <f:actionListener binding="#{providerBean.findByProviderID(offerBean.providerID)}"/>
+                                       <f:actionListener binding="#{freelancerBean.findByFreelancerID(loginBean.ID)}"/> 
+                                       <f:actionListener binding="#{jobBean.findByJobID(offerBean.jobID)}"/>                                        
+                                   </h:commandButton>
+
+                                   <p style="font-size: 20px">If you have decided, please press the submmit buttom: </p>
+                                   <h:commandButton id="createoffer" value="Submit" action="#{offerBean.proposeOffer(jobBean.getAjob(),providerBean.getAprovider(), freelancerBean.getAfreelancer())}">
+                                       <f:actionListener binding="#{logBean.offerLog(loginBean.ID,offerBean.providerID,offerBean.jobID)}"/> 
+                                       <f:actionListener binding="#{logBean.createLog()}"/>
+                                   </h:commandButton>
+                                   <h:outputText style="font-size: 20px; color: green" value="#{offerBean.submitsuccessful}"/>
+                               </h:panelGrid>
+                               </h:panelGrid>
+                                    
+                                    
+                                    
+                                </h:form>
+                                </ui:define>
+    
+
+             </ui:composition>
+    </h:body>
+</html>
